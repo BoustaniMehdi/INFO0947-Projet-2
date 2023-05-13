@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/zenixtu/School/Q2/Complément de programmation/Projets/Projet 2/code/Projet2",
-      "program": "/home/zenixtu/School/Q2/Complément de programmation/Projets/Projet 2/code/Projet2/build/Debug/outDebug",
+      "cwd": "/home/zenixtu/School/Q2/Complément de programmation/Projets/Projet 2/code",
+      "program": "/home/zenixtu/School/Q2/Complément de programmation/Projets/Projet 2/code/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
