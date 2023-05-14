@@ -13,6 +13,7 @@
 #define __ITINERAIRE_FLAMME__
 
 #include "region.h"
+#include "boolean.h"
 
 typedef struct cell_t Cellule;
 typedef struct itineraireFlamme_t ItineraireFlamme;
@@ -27,14 +28,13 @@ unsigned int nb_residents_total(ItineraireFlamme* itineraire);
 
 unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region);
 
-unsigned int is_present_list(ItineraireFlamme* itineraire, Region* region);
+Boolean is_present_list(ItineraireFlamme* itineraire, Region* region);
 
-unsigned int is_circuit_list(ItineraireFlamme* itineraire);
+Boolean is_circuit_list(ItineraireFlamme* itineraire);
 
 ItineraireFlamme* add_region_list(ItineraireFlamme* itineraire, Region* region);
 
 ItineraireFlamme* remove_region_list(ItineraireFlamme* itineraire);
-
 ItineraireFlamme* remove_region_array(ItineraireFlamme* itineraire);
 
 ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region);
