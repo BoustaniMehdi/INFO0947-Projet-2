@@ -7,9 +7,9 @@
  */
 
 #include <stdlib.h>
-#include "seatest.h"
 #include "itineraireflamme.h"
 #include "region.h"
+#include "seatest.h"
 
 
 /**
@@ -28,12 +28,30 @@
  */
 static void all_tests();
 
+static void test_itineraire();
+
+static void test_itineraire(){
+
+    Region* region1 = create_region(70, 100, "Tabodi");
+    Region* region2 = create_region(20, -60, "Nde");
+
+
+    ItineraireFlamme* itineraire = create_itineraire_list(region1, region2);
+
+    set_nb_residents(region1, 1000);
+
+    assert_int_equal(1000, get_nb_residents(region1));
+
+    free_itineraire_list(itineraire);
+
+}
+
 
 static void test_fixture(){
 
     test_fixture_start();
 
-    //run_test(test);
+    run_test(test_itineraire);
 
     test_fixture_end();
 }
@@ -44,5 +62,6 @@ static void all_tests(){
 
 
 int main(){
+
     return run_tests(all_tests);
 }
