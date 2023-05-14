@@ -3,6 +3,7 @@
 
 #include "region.h"
 #include "itineraireflamme.h"
+#include "boolean.h"
 
 struct cell_t{
     Region* region;
@@ -77,39 +78,39 @@ unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region){
     return get_nb_residents(region);
 }
 
-unsigned int is_present_list(ItineraireFlamme* itineraire, Region* region){
+Boolean is_present_list(ItineraireFlamme* itineraire, Region* region){
     assert(itineraire != NULL && region != NULL);
 
     ItineraireFlamme* temp = itineraire;
 
     if(!nb_regions(itineraire)) // Cas de base (liste vide)
-        return 0;
+        return False;
     
     if(temp->tail->region == region) // On check a chaque fois si la dernère région correspond à la région donnée
-        return 1;
+        return True;
 
     if(itineraire->tail->previous != NULL) // Condition vérifiant si la liste est vide.
         return is_present_list(remove_region_list(temp), region); // Cas récursif avec une liste plus petite pour atteindre le cas de base
 
-    return 0; // On prend quand même une valeur de retour par défaut au cas où
+    return False; // On prend quand même une valeur de retour par défaut au cas où
 }
 
-unsigned int is_circuit_list(ItineraireFlamme* itineraire){
+Boolean is_circuit_list(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
     ItineraireFlamme* temp = itineraire;
 
     if(nb_regions(itineraire) == 2) // Cas de base
-        return 0;
+        return False;
     
     if(is_present_list(remove_region_list(temp), itineraire->tail->region)) // On regarde si la région est présente ou non dans la sous-liste sans l'element à chercher.
-        return 1;                                                          // Cependant, il faudrait réflechir à une façon d'éviter le cas où plusieurs régions sont consécutives
+        return True;                                                          // Cependant, il faudrait réflechir à une façon d'éviter le cas où plusieurs régions sont consécutives
     else{
         return is_circuit_list(temp); // Sinon, on rappelle is_circuit mais avec la sous-liste
     }
     
 
-    return 0; // On retourne 0 par défaut
+    return False; // On retourne False par défaut
 }
 
 ItineraireFlamme* add_region_list(ItineraireFlamme* itineraire, Region* region){
