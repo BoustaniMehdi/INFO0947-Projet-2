@@ -3,6 +3,7 @@
 
 #include "region.h"
 #include "itineraireflamme.h"
+#include "boolean.h"
 
 struct itineraireFlamme_t {
     Region** regions;
@@ -11,7 +12,7 @@ struct itineraireFlamme_t {
 };
 
 
-ItineraireFlamme* create_itineraire_array(Region* region1, Region* region2) {
+ItineraireFlamme* create_itineraire_array(Region* region1, Region* region2){
     assert(region1 != NULL && region2 != NULL);
 
     ItineraireFlamme* itineraire = malloc(sizeof(ItineraireFlamme));
@@ -34,54 +35,63 @@ ItineraireFlamme* create_itineraire_array(Region* region1, Region* region2) {
     return itineraire;
 }
 
-unsigned int nb_regions(ItineraireFlamme* itineraire) {
+unsigned int nb_regions(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
     return itineraire->nb_regions;
 }
 
-unsigned int nb_residents_total(ItineraireFlamme* itineraire) {
+unsigned int nb_residents_total(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
     return itineraire->nb_residents_total;
 }
 
-unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region) {
+unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region){
     assert(itineraire != NULL && region != NULL);
 
     return get_nb_residents(region);
 }
 
-unsigned int is_present_array(ItineraireFlamme* itineraire, unsigned int num_region) {
+Region* get_last_region_tableau(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
-    for (unsigned int i = 0; i < num_region; i++) {
-        if (itineraire->regions[i] == itineraire->regions[num_region])
-            return 1;
+    return itineraire->regions[nb_regions(itineraire) - 1];
+
+}
+
+Boolean is_present_array(ItineraireFlamme* itineraire, unsigned int num_region){
+    assert(itineraire != NULL);
+
+    for(unsigned int i = 0; i < num_region; i++)
+    {
+        if(itineraire->regions[i] == itineraire->regions[num_region])
+            return True;
     }
 
-    return 0;
+    return False;
 }
 
 
-unsigned int is_circuit_array(ItineraireFlamme* itineraire) {
+Boolean is_circuit_array(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
-    for (unsigned int i = 1; i < itineraire->nb_regions; i++) {
-        if (is_present_array(itineraire, i))
-            return 1;
+    for(unsigned int i = 0; i < itineraire->nb_regions; i++)
+    {
+        if(is_present_array(itineraire, i))
+            return True;
     }
 
-    return 0;
+    return False;
 }
 
 
-ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region) {
+ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region){
     assert(itineraire != NULL && region != NULL);
 
     Region** new_regions = realloc(itineraire->regions, (itineraire->nb_regions + 1) * sizeof(Region*));
 
-    if (new_regions == NULL)
+    if(new_regions == NULL)
         return itineraire;
 
     itineraire->regions = new_regions;
@@ -93,7 +103,7 @@ ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region)
 }
 
 
-ItineraireFlamme* remove_region_array(ItineraireFlamme* itineraire) {
+ItineraireFlamme* remove_region_array(ItineraireFlamme* itineraire){
     assert(itineraire != NULL && itineraire->nb_regions > 2);
 
     Region* removed_region = itineraire->regions[itineraire->nb_regions - 1];
@@ -107,17 +117,15 @@ ItineraireFlamme* remove_region_array(ItineraireFlamme* itineraire) {
     // Réallouer le tableau avec une taille réduite
     Region** new_regions = realloc(itineraire->regions, itineraire->nb_regions * sizeof(Region*));
 
-    if (new_regions == NULL) {
-        // En cas d'échec de réallocation, on conserve l'ancien tableau
-        return itineraire;
-    }
+    if(new_regions == NULL) 
+        return itineraire;// En cas d'échec de réallocation, on conserve l'ancien tableau
 
     itineraire->regions = new_regions;
 
     return itineraire;
 }
 
-void free_itineraire(ItineraireFlamme* itineraire) {
+void free_itineraire_array(ItineraireFlamme* itineraire) {
     if (itineraire == NULL)
         return;
 

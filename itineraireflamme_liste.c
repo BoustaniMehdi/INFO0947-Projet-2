@@ -16,11 +16,10 @@ struct itineraireFlamme_t{
     struct cell_t* tail; // Pointeur de fin
     unsigned int nb_regions; // Pas longueur de la liste étant donné qu'une même région peut être présente plusieurs fois.
     unsigned int nb_residents_total;
-    unsigned int length; // Longueur de la liste
 };
 
 ItineraireFlamme* create_itineraire_list(Region* region1, Region* region2){
-    assert(region1 != NULL && region2 != NULL);
+    assert(region1 != NULL && region2 != NULL && get_x(region1) != get_x(region2) && get_y(region1) != get_y(region2));
 
     ItineraireFlamme* itineraire = malloc(sizeof(ItineraireFlamme));
 
@@ -78,6 +77,12 @@ unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region){
     return get_nb_residents(region);
 }
 
+Region* get_last_region_list(ItineraireFlamme* itineraire){
+    assert(itineraire != NULL);
+
+    return itineraire->head->region;
+}
+
 Boolean is_present_list(ItineraireFlamme* itineraire, Region* region){
     assert(itineraire != NULL && region != NULL);
 
@@ -108,7 +113,6 @@ Boolean is_circuit_list(ItineraireFlamme* itineraire){
     else{
         return is_circuit_list(temp); // Sinon, on rappelle is_circuit mais avec la sous-liste
     }
-    
 
     return False; // On retourne False par défaut
 }
@@ -128,11 +132,9 @@ ItineraireFlamme* add_region_list(ItineraireFlamme* itineraire, Region* region){
     itineraire->tail->next = cell;
     itineraire->tail = cell;
 
-    if(!is_present_list(itineraire, region))
-        itineraire->nb_regions++;
+    itineraire->nb_regions++;
     
     itineraire->nb_residents_total += get_nb_residents(region);
-    itineraire->length++; // length augmente même s'il y a des régions identiques dans l'itinéraire.
 
     return itineraire;
 }
@@ -149,8 +151,25 @@ ItineraireFlamme* remove_region_list(ItineraireFlamme* itineraire){
     itineraire->tail->next = NULL;
 
     itineraire->nb_regions--;
-    itineraire->length--;
 
     return itineraire;
+}
+
+void free_itineraire_list(ItineraireFlamme* itineraire){
+    assert(itineraire != NULL);
+
+    Cellule* curr = itineraire->head;
+    Cellule* next = NULL;
+
+    while(curr != NULL){
+        next = curr->next;
+        
+        free(curr->region);
+        free(curr);
+
+        curr = next;
+    }
+
+    free(itineraire);
 }
 

@@ -14,11 +14,11 @@
 
 typedef struct region_t Region;
 
-Region* create_region(float x, float y,char* name_region);
+Region* create_region(float x, float y, char* name_region);
 
-float get_y_coordinate(Region* region);
+float get_y(Region* region);
 
-float get_x_coordinate(Region* region);
+float get_x(Region* region);
 
 const char* get_region_name(Region* region);
 
