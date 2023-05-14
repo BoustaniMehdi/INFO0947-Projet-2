@@ -52,7 +52,7 @@ unsigned int nb_residents_array(ItineraireFlamme* itineraire, Region* region){
 
     for(unsigned int i = 0; i < itineraire->nb_regions; i++)
     {
-        if(is_present_array(itineraire, i))
+        if(itineraire->regions[i] == region)
             return get_nb_residents(region);
     }
 
@@ -69,9 +69,9 @@ Region* get_last_region_tableau(ItineraireFlamme* itineraire){
 Boolean is_present_array(ItineraireFlamme* itineraire, unsigned int num_region){
     assert(itineraire != NULL);
 
-    for(unsigned int i = 0; i < num_region; i++)
+    for(unsigned int j = 0; j < num_region; j++)
     {
-        if(itineraire->regions[i] == itineraire->regions[num_region])
+        if(itineraire->regions[j] == itineraire->regions[num_region])
             return True;
     }
 
