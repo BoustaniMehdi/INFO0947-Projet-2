@@ -41,7 +41,7 @@ ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region)
 
 unsigned int is_circuit_array(ItineraireFlamme* itineraire);
 
-unsigned int is_present_array(ItineraireFlamme* itineraire, Region* region);
+unsigned int is_present_array(ItineraireFlamme* itineraire, unsigned int num_region);
 
 void free_itineraire(ItineraireFlamme* itineraire);
 

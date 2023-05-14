@@ -47,38 +47,37 @@ unsigned int nb_residents_total(ItineraireFlamme* itineraire) {
 }
 
 unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region) {
-    assert(itineraire != NULL && region != NULL && is_present_array(itineraire, region));
+    assert(itineraire != NULL && region != NULL);
 
     return get_nb_residents(region);
 }
 
-unsigned int is_present_array(ItineraireFlamme* itineraire, Region* region) {
-    assert(itineraire != NULL && region != NULL);
+unsigned int is_present_array(ItineraireFlamme* itineraire, unsigned int num_region) {
+    assert(itineraire != NULL);
 
-    for (unsigned int i = 0; i < itineraire->nb_regions; i++) {
-        if (itineraire->regions[i] == region)
+    for (unsigned int i = 0; i < num_region; i++) {
+        if (itineraire->regions[i] == itineraire->regions[num_region])
             return 1;
     }
 
     return 0;
 }
+
 
 unsigned int is_circuit_array(ItineraireFlamme* itineraire) {
     assert(itineraire != NULL);
 
     for (unsigned int i = 1; i < itineraire->nb_regions; i++) {
-        if (is_present_array(remove_region_array(itineraire), itineraire->regions[i]))
+        if (is_present_array(itineraire, i))
             return 1;
     }
 
     return 0;
 }
 
+
 ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region) {
     assert(itineraire != NULL && region != NULL);
-
-    if (is_present_array(itineraire, region))
-        return itineraire;
 
     Region** new_regions = realloc(itineraire->regions, (itineraire->nb_regions + 1) * sizeof(Region*));
 
