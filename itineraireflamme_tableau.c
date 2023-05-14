@@ -13,7 +13,7 @@ struct itineraireFlamme_t {
 
 
 ItineraireFlamme* create_itineraire_array(Region* region1, Region* region2){
-    assert(region1 != NULL && region2 != NULL);
+    assert(region1 != NULL && region2 != NULL && get_x(region1) != get_x(region2) && get_y(region1) != get_y(region2));
 
     ItineraireFlamme* itineraire = malloc(sizeof(ItineraireFlamme));
 

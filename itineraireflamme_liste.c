@@ -14,7 +14,7 @@ struct cell_t{
 struct itineraireFlamme_t{
     struct cell_t* head; // Pointeur de début
     struct cell_t* tail; // Pointeur de fin
-    unsigned int nb_regions; // Pas longueur de la liste étant donné qu'une même région peut être présente plusieurs fois.
+    unsigned int nb_regions;
     unsigned int nb_residents_total;
 };
 
