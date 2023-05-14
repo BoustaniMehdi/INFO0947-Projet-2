@@ -29,16 +29,16 @@ test_list: $(LIST_OBJECTS)
 	$(LD) -o $(LIST_EXEC) $(LIST_OBJECTS) $(CFLAGS) $(LDFLAGS)
 
 itineraireflamme_tableau.o : itineraireflamme_tableau.c region.c seatest.c
-	$(CC) -c itineraireflamme_tableau.c -o $(ARRAY_OBJECTS) $(CFLAGS)
+	$(CC) -c itineraireflamme_tableau.c -o itineraireflamme_tableau.o $(CFLAGS)
 
 itineraireflamme_tableau_test.o : itineraireflamme_tableau_test.c region.c seatest.c
-	$(CC) -c itineraireflamme_tableau.c -o $(ARRAY_OBJECTS) $(CFLAGS)
+	$(CC) -c itineraireflamme_tableau.c -o itineraireflamme_tableau_test.o  $(CFLAGS)
 
 itineraireflamme_liste.o : itineraireflamme_liste.c region.c seatest.c
-	$(CC) -c itineraireflamme_liste.c -o $(LIST_OBJECTS) $(CFLAGS)
+	$(CC) -c itineraireflamme_liste.c -o itineraireflamme_liste.o $(CFLAGS)
 
 itineraireflamme_liste_test.o : itineraireflamme_liste_test.c region.c seatest.c
-	$(CC) -c itineraireflamme_liste.c -o $(LIST_OBJECTS) $(CFLAGS)
+	$(CC) -c itineraireflamme_liste.c -o itineraireflamme_liste_test.o  $(CFLAGS)
 
 region.o: region.c
 	$(CC) -c region.c -o region.o $(CFLAGS)

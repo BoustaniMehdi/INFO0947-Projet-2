@@ -71,7 +71,7 @@ unsigned int nb_residents_total(ItineraireFlamme* itineraire){
     return itineraire->nb_residents_total;
 }
 
-unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region){
+unsigned int nb_residents_list(ItineraireFlamme* itineraire, Region* region){
     assert(itineraire != NULL && region != NULL && is_present_list(itineraire, region));
 
     return get_nb_residents(region);

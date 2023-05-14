@@ -47,10 +47,16 @@ unsigned int nb_residents_total(ItineraireFlamme* itineraire){
     return itineraire->nb_residents_total;
 }
 
-unsigned int nb_residents(ItineraireFlamme* itineraire, Region* region){
+unsigned int nb_residents_array(ItineraireFlamme* itineraire, Region* region){
     assert(itineraire != NULL && region != NULL);
 
-    return get_nb_residents(region);
+    for(unsigned int i = 0; i < itineraire->nb_regions; i++)
+    {
+        if(is_present_array(itineraire, i))
+            return get_nb_residents(region);
+    }
+
+    return 0;
 }
 
 Region* get_last_region_tableau(ItineraireFlamme* itineraire){
