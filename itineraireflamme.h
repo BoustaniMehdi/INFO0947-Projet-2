@@ -19,6 +19,8 @@ typedef struct itineraireFlamme_t ItineraireFlamme;
 
 ItineraireFlamme* create_itineraire_list(Region* region1, Region* region2);
 
+ItineraireFlamme* create_itineraire_array(Region* region1, Region* region2);
+
 unsigned int nb_regions(ItineraireFlamme* itineraire);
 
 unsigned int nb_residents_total(ItineraireFlamme* itineraire);
@@ -33,6 +35,14 @@ ItineraireFlamme* add_region_list(ItineraireFlamme* itineraire, Region* region);
 
 ItineraireFlamme* remove_region_list(ItineraireFlamme* itineraire);
 
+ItineraireFlamme* remove_region_array(ItineraireFlamme* itineraire);
 
+ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region);
+
+unsigned int is_circuit_array(ItineraireFlamme* itineraire);
+
+unsigned int is_present_array(ItineraireFlamme* itineraire, Region* region);
+
+void free_itineraire(ItineraireFlamme* itineraire);
 
 #endif //__ITINERAIRE_FLAMME__

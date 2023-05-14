@@ -14,4 +14,22 @@
 
 typedef struct region_t Region;
 
+Region* create_region(float x, float y,char* name_region);
+
+float get_y_coordinate(Region* region);
+
+float get_x_coordinate(Region* region);
+
+const char* get_region_name(Region* region);
+
+const char* get_capital_name(Region* region);
+
+float calculate_distance(Region* region1, const Region* region2);
+
+void set_nb_residents(Region* region, unsigned int nb_residents);
+
+unsigned int get_nb_residents(Region* region);
+
+const char* get_speciality(Region* region);
+
 #endif //__REGION__
