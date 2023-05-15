@@ -109,6 +109,7 @@ static void test_get_last_region(){
     assert_string_equal(get_region_name(region2), get_region_name(get_last_region_array(itineraire)));
     assert_string_equal(get_region_name(region3), get_region_name(get_last_region_array(add_region_array(itineraire, region3))));
     assert_string_equal(get_region_name(get_last_region_array(itineraire)), get_region_name(get_last_region_array(remove_region_array(itineraire))));
+    
 
 }
 

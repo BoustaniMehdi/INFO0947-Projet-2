@@ -48,7 +48,7 @@ boolean.o: boolean.c99
 
 valgrind_array: test_array
 	valgrind --leak-check=full --show-leak-kinds=all ./$(ARRAY_EXEC)
-valgrind_list
+
 valgrind_list: test_list
 	valgrind --leak-check=full --show-leak-kinds=all ./$(LIST_EXEC)
 
