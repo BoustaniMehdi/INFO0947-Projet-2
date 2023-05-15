@@ -118,7 +118,7 @@ Boolean is_circuit_list(ItineraireFlamme* itineraire){
 }
 
 ItineraireFlamme* add_region_list(ItineraireFlamme* itineraire, Region* region){
-    assert(itineraire != NULL && region != NULL);
+    assert(itineraire != NULL && region != NULL && (itineraire->tail->region != itineraire->tail->previous->region));
 
     Cellule* cell = malloc(sizeof(Cellule)); // On alloue une nouvelle place pour la région
 

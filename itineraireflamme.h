@@ -27,7 +27,7 @@ unsigned int nb_regions(ItineraireFlamme* itineraire);
 unsigned int nb_residents_total(ItineraireFlamme* itineraire);
 
 unsigned int nb_residents_list(ItineraireFlamme* itineraire, Region* region);
-unsigned int nb_residents_array(ItineraireFlamme* itineraire, Region* region);
+int nb_residents_array(ItineraireFlamme* itineraire, Region* region);
 
 Region* get_last_region_list(ItineraireFlamme* itineraire);
 Region* get_last_region_tableau(ItineraireFlamme* itineraire);
