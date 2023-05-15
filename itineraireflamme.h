@@ -22,6 +22,8 @@ ItineraireFlamme* create_itineraire_list(Region* region1, Region* region2);
 
 ItineraireFlamme* create_itineraire_array(Region* region1, Region* region2);
 
+ItineraireFlamme* copie_itineraire(ItineraireFlamme* itineraire);
+
 unsigned int nb_regions(ItineraireFlamme* itineraire);
 
 unsigned int nb_residents_total(ItineraireFlamme* itineraire);

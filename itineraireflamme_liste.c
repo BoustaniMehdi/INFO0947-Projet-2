@@ -80,7 +80,7 @@ unsigned int nb_residents_list(ItineraireFlamme* itineraire, Region* region){
 Region* get_last_region_list(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
-    return itineraire->head->region;
+    return itineraire->tail->region;
 }
 
 Boolean is_present_list(ItineraireFlamme* itineraire, Region* region){
@@ -88,7 +88,7 @@ Boolean is_present_list(ItineraireFlamme* itineraire, Region* region){
 
     ItineraireFlamme* temp = itineraire;
 
-    if(!nb_regions(itineraire)) // Cas de base (liste vide)
+    if(!nb_regions(temp)) // Cas de base (liste vide)
         return False;
     
     if(temp->tail->region == region) // On check a chaque fois si la dernère région correspond à la région donnée
@@ -100,12 +100,32 @@ Boolean is_present_list(ItineraireFlamme* itineraire, Region* region){
     return False; // On prend quand même une valeur de retour par défaut au cas où
 }
 
+ItineraireFlamme* copie_itineraire(ItineraireFlamme* itineraire){
+    assert(itineraire != NULL);
+
+    ItineraireFlamme* copie = create_itineraire_list(itineraire->head->region, itineraire->head->next->region);
+
+    if(copie == NULL)
+        return NULL;
+
+    Cellule* courante = itineraire->head->next->next;
+
+    while(courante != NULL){
+        Region* region = courante->region;
+        add_region_list(copie, region);
+
+        courante = courante->next;
+    }
+
+    return copie;
+}
+
 Boolean is_circuit_list(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
-    ItineraireFlamme* temp = itineraire;
+    ItineraireFlamme* temp = copie_itineraire(itineraire);
 
-    if(nb_regions(itineraire) == 2) // Cas de base
+    if(nb_regions(temp) == 2) // Cas de base
         return False;
     
     if(is_present_list(remove_region_list(temp), itineraire->tail->region)) // On regarde si la région est présente ou non dans la sous-liste sans l'element à chercher.
@@ -118,7 +138,7 @@ Boolean is_circuit_list(ItineraireFlamme* itineraire){
 }
 
 ItineraireFlamme* add_region_list(ItineraireFlamme* itineraire, Region* region){
-    assert(itineraire != NULL && region != NULL && (itineraire->tail->region != itineraire->tail->previous->region));
+    assert(itineraire != NULL && region != NULL && (calcul_dist(get_last_region_list(itineraire), region)));
 
     Cellule* cell = malloc(sizeof(Cellule)); // On alloue une nouvelle place pour la région
 
@@ -140,7 +160,7 @@ ItineraireFlamme* add_region_list(ItineraireFlamme* itineraire, Region* region){
 }
 
 ItineraireFlamme* remove_region_list(ItineraireFlamme* itineraire){
-    assert(itineraire != NULL && nb_regions(itineraire) > 2);
+    assert(itineraire != NULL && nb_regions(itineraire) >= 2);
 
     itineraire->nb_residents_total -= get_nb_residents(itineraire->tail->region);
 

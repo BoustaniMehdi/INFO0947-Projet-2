@@ -24,7 +24,7 @@ const char* get_region_name(Region* region);
 
 const char* get_capital_name(Region* region);
 
-float calculate_distance(Region* region1, const Region* region2);
+float calcul_dist(Region* region1, const Region* region2);
 
 void set_nb_residents(Region* region, unsigned int nb_residents);
 

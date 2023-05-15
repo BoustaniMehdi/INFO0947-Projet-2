@@ -67,7 +67,7 @@ const char* get_capital_name(Region* region){
 }
 
 // Calculer la distance géographique entre deux régions (distance entre les chefs-lieux)
-float calculate_distance(Region* region1, const Region* region2){
+float calcul_dist(Region* region1, const Region* region2){
     assert(region1 != NULL && region2 != NULL);
 
     float distance = sqrt(pow(region1->x - region2->x, 2) + pow(region1->y - region2->y, 2));
