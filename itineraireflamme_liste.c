@@ -72,7 +72,7 @@ unsigned int nb_residents_total(ItineraireFlamme* itineraire){
 }
 
 unsigned int nb_residents_list(ItineraireFlamme* itineraire, Region* region){
-    assert(itineraire != NULL && region != NULL && is_present_list(itineraire, region));
+    assert(itineraire != NULL && region != NULL && is_present_list_assert(itineraire, region));
 
     return get_nb_residents(region);
 }
@@ -81,6 +81,23 @@ Region* get_last_region_list(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
     return itineraire->tail->region;
+}
+
+Boolean is_present_list_assert(ItineraireFlamme* itineraire, Region* region){
+    assert(itineraire != NULL && region != NULL);
+
+    ItineraireFlamme* temp = copie_itineraire(itineraire);
+
+    if(!nb_regions(temp)) // Cas de base (liste vide)
+        return False;
+    
+    if(temp->tail->region == region) // On check a chaque fois si la dernère région correspond à la région donnée
+        return True;
+
+    if(itineraire->tail->previous != NULL) // Condition vérifiant si la liste est vide.
+        return is_present_list(remove_region_list(temp), region); // Cas récursif avec une liste plus petite pour atteindre le cas de base
+
+    return False; // On prend quand même une valeur de retour par défaut au cas où
 }
 
 Boolean is_present_list(ItineraireFlamme* itineraire, Region* region){

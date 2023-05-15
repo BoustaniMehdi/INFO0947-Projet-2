@@ -20,16 +20,16 @@ float get_y(Region* region);
 
 float get_x(Region* region);
 
-const char* get_region_name(Region* region);
+char* get_region_name(Region* region);
 
-const char* get_capital_name(Region* region);
+char* get_capital_name(Region* region);
 
-float calcul_dist(Region* region1, const Region* region2);
+float calcul_dist(Region* region1, Region* region2);
 
 void set_nb_residents(Region* region, unsigned int nb_residents);
 
 unsigned int get_nb_residents(Region* region);
 
-const char* get_speciality(Region* region);
+char* get_speciality(Region* region);
 
 #endif //__REGION__

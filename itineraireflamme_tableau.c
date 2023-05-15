@@ -59,7 +59,7 @@ int nb_residents_array(ItineraireFlamme* itineraire, Region* region){
     return 0;
 }
 
-Region* get_last_region_tableau(ItineraireFlamme* itineraire){
+Region* get_last_region_array(ItineraireFlamme* itineraire){
     assert(itineraire != NULL);
 
     return itineraire->regions[nb_regions(itineraire) - 1];
@@ -93,7 +93,7 @@ Boolean is_circuit_array(ItineraireFlamme* itineraire){
 
 
 ItineraireFlamme* add_region_array(ItineraireFlamme* itineraire, Region* region){
-    assert(itineraire != NULL && region != NULL && (get_last_region_tableau(itineraire) != region));
+    assert(itineraire != NULL && region != NULL && (get_last_region_array(itineraire) != region));
 
     Region** new_regions = realloc(itineraire->regions, (itineraire->nb_regions + 1) * sizeof(Region*));
 

@@ -23,6 +23,7 @@ ItineraireFlamme* create_itineraire_list(Region* region1, Region* region2);
 ItineraireFlamme* create_itineraire_array(Region* region1, Region* region2);
 
 ItineraireFlamme* copie_itineraire(ItineraireFlamme* itineraire);
+Boolean is_present_list_assert(ItineraireFlamme* itineraire, Region* region);
 
 unsigned int nb_regions(ItineraireFlamme* itineraire);
 
@@ -32,7 +33,7 @@ unsigned int nb_residents_list(ItineraireFlamme* itineraire, Region* region);
 int nb_residents_array(ItineraireFlamme* itineraire, Region* region);
 
 Region* get_last_region_list(ItineraireFlamme* itineraire);
-Region* get_last_region_tableau(ItineraireFlamme* itineraire);
+Region* get_last_region_array(ItineraireFlamme* itineraire);
 
 Boolean is_present_list(ItineraireFlamme* itineraire, Region* region);
 

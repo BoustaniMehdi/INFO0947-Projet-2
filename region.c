@@ -53,21 +53,21 @@ float get_y(Region* region) {
 }
 
 // Obtenir le nom de la région
-const char* get_region_name(Region* region) {
+char* get_region_name(Region* region) {
     assert(region != NULL);
 
     return region->name_region;
 }
 
 // Obtenir le nom du chef-lieu
-const char* get_capital_name(Region* region){
+char* get_capital_name(Region* region){
     assert(region != NULL);
     
     return region->name_capital;
 }
 
 // Calculer la distance géographique entre deux régions (distance entre les chefs-lieux)
-float calcul_dist(Region* region1, const Region* region2){
+float calcul_dist(Region* region1, Region* region2){
     assert(region1 != NULL && region2 != NULL);
 
     float distance = sqrt(pow(region1->x - region2->x, 2) + pow(region1->y - region2->y, 2));
@@ -90,7 +90,7 @@ unsigned int get_nb_residents(Region* region){
 }
 
 // Obtenir la spécialité de la région
-const char* get_speciality(Region* region){
+char* get_speciality(Region* region){
     assert(region != NULL);
 
     return region->speciality;

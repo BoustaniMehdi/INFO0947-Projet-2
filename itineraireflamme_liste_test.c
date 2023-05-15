@@ -36,6 +36,8 @@ static void test_nb_residents_total();
 
 static void test_nb_residents_list();
 
+static void test_get_last_region();
+
 static void test_is_circuit(){
 
     Region* region1 = create_region(70, 100, "Tabodi");
@@ -86,17 +88,28 @@ static void test_nb_residents_list(){
 
     Region* region1 = create_region(70, 100, "Tabodi");
     Region* region2 = create_region(20, -60, "Nde");
-    //Region* region3 = create_region(60, -10, "Regular");
 
 
     ItineraireFlamme* itineraire = create_itineraire_list(region1, region2);
 
-    //int initialNumber = nb_residents_total(itineraire);
-
-    fprintf(stderr,"%s", get_region_name(get_last_region_list(itineraire)));
-
     assert_int_equal(get_nb_residents(region1), nb_residents_list(itineraire, region1));
-    //assert_int_equal(nb_residents_list(itineraire, region2), nb_residents_list(add_region_list(itineraire, region1), region2));
+    assert_int_equal(nb_residents_list(itineraire, region2), nb_residents_list(add_region_list(itineraire, region1), region2));
+    assert_int_equal(nb_residents_list(itineraire, region2), nb_residents_list(remove_region_list(itineraire), region2));
+}
+
+static void test_get_last_region(){
+
+    Region* region1 = create_region(70, 100, "Tabodi");
+    Region* region2 = create_region(20, -60, "Nde");
+    Region* region3 = create_region(60, -10, "Regular");
+
+
+    ItineraireFlamme* itineraire = create_itineraire_list(region1, region2);
+
+    assert_string_equal(get_region_name(region2), get_region_name(get_last_region_list(itineraire)));
+    assert_string_equal(get_region_name(region3), get_region_name(get_last_region_list(add_region_list(itineraire, region3))));
+    assert_string_equal(get_region_name(get_last_region_list(itineraire)), get_region_name(get_last_region_list(remove_region_list(itineraire))));
+
 }
 
 
@@ -108,6 +121,7 @@ static void test_fixture(){
     run_test(test_nb_regions);
     run_test(test_nb_residents_total);
     run_test(test_nb_residents_list);
+    run_test(test_get_last_region);
 
     test_fixture_end();
 }
