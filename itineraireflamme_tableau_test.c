@@ -49,6 +49,8 @@ static void test_is_circuit(){
     assert_true(is_circuit_array(add_region_array(itineraire, region1)));
     assert_false(is_circuit_array(remove_region_array(itineraire)));
     
+
+    free_itineraire_array(itineraire);
 }
 
 static void test_nb_regions(){
@@ -63,8 +65,7 @@ static void test_nb_regions(){
     assert_int_equal(initialNumber += 1, nb_regions(add_region_array(itineraire, region1)));
     assert_int_equal(initialNumber -= 1, nb_regions(remove_region_array(itineraire)));
 
-    
-
+    free_itineraire_array(itineraire);
 }
 
 static void test_nb_residents_total(){
@@ -82,6 +83,8 @@ static void test_nb_residents_total(){
     assert_int_equal(initialNumber += get_nb_residents(region3), nb_residents_total(add_region_array(itineraire, region3)));
     assert_int_equal(initialNumber -= get_nb_residents(get_last_region_array(itineraire)), nb_residents_total(remove_region_array(itineraire)));
 
+    free_itineraire_array(itineraire);
+
 }
 
 static void test_nb_residents_array(){
@@ -95,6 +98,8 @@ static void test_nb_residents_array(){
     assert_int_equal(get_nb_residents(region1), nb_residents_array(itineraire, region1));
     assert_int_equal(nb_residents_array(itineraire, region2), nb_residents_array(add_region_array(itineraire, region1), region2));
     assert_int_equal(nb_residents_array(itineraire, region2), nb_residents_array(remove_region_array(itineraire), region2));
+
+    free_itineraire_array(itineraire);
 }
 
 static void test_get_last_region(){
@@ -109,7 +114,8 @@ static void test_get_last_region(){
     assert_string_equal(get_region_name(region2), get_region_name(get_last_region_array(itineraire)));
     assert_string_equal(get_region_name(region3), get_region_name(get_last_region_array(add_region_array(itineraire, region3))));
     assert_string_equal(get_region_name(get_last_region_array(itineraire)), get_region_name(get_last_region_array(remove_region_array(itineraire))));
-    
+
+    free_itineraire_array(itineraire);
 
 }
 
@@ -133,6 +139,6 @@ static void all_tests(){
 
 
 int main(){
-
+    
     return run_tests(all_tests);
 }

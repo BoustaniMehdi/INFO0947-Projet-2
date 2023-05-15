@@ -88,9 +88,11 @@ Boolean is_present_list_assert(ItineraireFlamme* itineraire, Region* region){
 
     ItineraireFlamme* temp = copie_itineraire(itineraire);
 
-    if(!nb_regions(temp)) // Cas de base (liste vide)
+    if(!nb_regions(temp)){
+        free_itineraire_list(temp);
         return False;
-    
+    }
+        
     if(temp->tail->region == region) // On check a chaque fois si la dernère région correspond à la région donnée
         return True;
 
@@ -105,9 +107,10 @@ Boolean is_present_list(ItineraireFlamme* itineraire, Region* region){
 
     ItineraireFlamme* temp = itineraire;
 
-    if(!nb_regions(temp)) // Cas de base (liste vide)
+    if(!nb_regions(temp)){// Cas de base (liste vide)
+        free_itineraire_list(temp);
         return False;
-    
+    }
     if(temp->tail->region == region) // On check a chaque fois si la dernère région correspond à la région donnée
         return True;
 
@@ -142,8 +145,9 @@ Boolean is_circuit_list(ItineraireFlamme* itineraire){
 
     ItineraireFlamme* temp = copie_itineraire(itineraire);
 
-    if(nb_regions(temp) == 2) // Cas de base
+    if(nb_regions(temp) == 2){// Cas de base
         return False;
+    } 
     
     if(is_present_list(remove_region_list(temp), itineraire->tail->region)) // On regarde si la région est présente ou non dans la sous-liste sans l'element à chercher.
         return True;                                                          // Cependant, il faudrait réflechir à une façon d'éviter le cas où plusieurs régions sont consécutives

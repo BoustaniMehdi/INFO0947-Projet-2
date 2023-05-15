@@ -132,8 +132,7 @@ ItineraireFlamme* remove_region_array(ItineraireFlamme* itineraire){
 }
 
 void free_itineraire_array(ItineraireFlamme* itineraire) {
-    if (itineraire == NULL)
-        return;
+    assert(itineraire != NULL);
 
     // Libérer chaque région dans le tableau
     for (unsigned int i = 0; i < itineraire->nb_regions; i++) {

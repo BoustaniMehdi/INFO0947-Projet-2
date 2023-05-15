@@ -48,6 +48,9 @@ static void test_is_circuit(){
     assert_false(is_circuit_list(itineraire));
     assert_true(is_circuit_list(add_region_list(itineraire, region1)));
     assert_false(is_circuit_list(remove_region_list(itineraire)));
+
+
+    free_itineraire_list(itineraire);
     
 }
 
@@ -82,6 +85,7 @@ static void test_nb_residents_total(){
     assert_int_equal(initialNumber += get_nb_residents(region3), nb_residents_total(add_region_list(itineraire, region3)));
     assert_int_equal(initialNumber -= get_nb_residents(get_last_region_list(itineraire)), nb_residents_total(remove_region_list(itineraire)));
 
+    free_itineraire_list(itineraire);
 }
 
 static void test_nb_residents_list(){
@@ -95,6 +99,8 @@ static void test_nb_residents_list(){
     assert_int_equal(get_nb_residents(region1), nb_residents_list(itineraire, region1));
     assert_int_equal(nb_residents_list(itineraire, region2), nb_residents_list(add_region_list(itineraire, region1), region2));
     assert_int_equal(nb_residents_list(itineraire, region2), nb_residents_list(remove_region_list(itineraire), region2));
+
+    free_itineraire_list(itineraire);
 }
 
 static void test_get_last_region(){
@@ -109,6 +115,8 @@ static void test_get_last_region(){
     assert_string_equal(get_region_name(region2), get_region_name(get_last_region_list(itineraire)));
     assert_string_equal(get_region_name(region3), get_region_name(get_last_region_list(add_region_list(itineraire, region3))));
     assert_string_equal(get_region_name(get_last_region_list(itineraire)), get_region_name(get_last_region_list(remove_region_list(itineraire))));
+
+    free_itineraire_list(itineraire);
 
 }
 
